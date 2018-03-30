@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import flask
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -7,22 +8,26 @@ import pandas as pd
 import numpy as np
 from scipy.stats import binom
 import plotly.graph_objs as go
+import os
+from random import randint
 
-app = dash.Dash()
+server = flask.Flask(__name__)
+server.secret_key = os.environ.get('secret_key', str(randint(0, 1000000)))
+app = dash.Dash(__name__, server=server)
 
 app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
 
 description = '''
 ### Background
-The statistical analysis associated with the triangle test compares the proportion of test participants whom have correctly identified an odd beer out, to the proportion of tasters that would be expected to correctly identify the odd beer purely due to random chance. The greater the proportion of correct participants, the more evidence there is against the “random chance” null hypothesis. As we are only interested if the different beers can be correctly distinguished, this will be an “upper tailed” test. That is to say, the potential result of the odd beer out being correctly identified less than we’d expect under random chance isn’t of particular interest to us.
+The statistical analysis associated with the triangle test compares the proportion of test participants that have correctly identified an odd sample out, to the proportion of tasters that would be expected to correctly identify the odd sample purely due to random chance. The greater the proportion of correct participants, the more evidence there is against the “random chance” null hypothesis. As we are only interested if the different beers can be correctly distinguished, this will be an “upper tailed” test. That is to say, the potential result of the odd sample out being correctly identified less than we’d expect under random chance isn’t of relevance.
 
-In plain terms, our null hypothesis is that the true proportion of population that can correctly identify the odd beer out is 1/3. Our alternative hypothesis is that the true proportion of the population that can correctly identify the odd beer out is greater than 1/3.
+In plain terms, our null hypothesis is that the true proportion of population that can correctly identify the odd sample out is 1/3. Our alternative hypothesis is that the true proportion of the population that can correctly identify the odd sample out is greater than 1/3.
 
 ### Exact p-value
 The exact p-value can be calculated using the binomial distribution. Specifically, the p-value is found as the probability of having observed at least as many correct tasters, if the population proportion is infact equal to 1/3. This calculation is implemented in the right pane of this web app.
 
 ### Approximate p-value
-An approximate p-value can also be calculated assuming that under the null hypothesis, the estimated proportion will follow a normal distribution with mean equal to 1/3, and variance equal to (2/(9 * n)), where n is the sample size. This approximate method may be used when the sample size is large (at least 25), thanks to Central Limit Theorem.
+An approximate p-value can also be calculated assuming that under the null hypothesis, the sample proportion will follow a normal distribution with mean equal to 1/3 and variance equal to 2/(9*n), where n is the sample size. This approximate method may be used when the sample size is large (at least 25), thanks to Central Limit Theorem.
 '''
 
 
@@ -30,8 +35,9 @@ attribution = '''
 Built by [Justin Angevaare](http://onuncertainty.com) with [Plot.ly Dash](https://dash.plot.ly)
 '''
 
-
+app.title = 'Triangle Test Calculator'
 app.layout = html.Div(className = 'twelve columns', children=[
+html.Script(type="text/javascript", src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"),
     html.Div(className='row', children=[
         html.Center(
             html.H1('Triangle Test Calculator')
