@@ -19,15 +19,15 @@ app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"
 
 description = '''
 ### Background
-The statistical analysis associated with the triangle test compares the proportion of test participants that have correctly identified an odd sample out, to the proportion of tasters that would be expected to correctly identify the odd sample purely due to random chance. The greater the proportion of correct participants, the more evidence there is against the “random chance” null hypothesis. As we are only interested if the different beers can be correctly distinguished, this will be an “upper tailed” test. That is to say, the potential result of the odd sample out being correctly identified less than we’d expect under random chance isn’t of relevance.
+The statistical analysis associated with the triangle test compares the proportion of test participants that have correctly identified an odd sample out, to the proportion of participants that would be expected to correctly identify the odd sample purely due to random chance. The greater the proportion of correct participants, the more evidence there is against the “random chance” null hypothesis. As we are only interested if the different sample can be correctly distinguished, this will be an “upper tailed” test. That is to say, the potential result of the odd sample out being correctly identified less than we’d expect due to random chance isn’t of relevance.
 
-In plain terms, our null hypothesis, Η₀, is that the true proportion of population that can correctly identify the odd sample out is 1/3. Our alternative hypothesis, H₁, is that the true proportion of the population that can correctly identify the odd sample out is greater than 1/3.
+There are three possible selections a triangle participant may make, with only one of those correctly identifying the odd sample. In plain terms, our null hypothesis, Η₀, is that the proportion of population that would correctly identify the odd sample out is no better than 1/3. Our alternative hypothesis, H₁, is that the true proportion of the population that would correctly identify the odd sample out is greater than 1/3.
 
 ### Exact p-value
 The exact p-value can be calculated using the binomial distribution. Specifically, the p-value is found as the probability of having observed at least as many correct tasters, if the population proportion is infact equal to 1/3. This calculation is implemented in the right pane of this web app.
 
 ### Approximate p-value
-An approximate p-value can also be calculated assuming that under the null hypothesis, the sample proportion will follow a normal distribution with mean equal to 1/3 and variance equal to 2/(9*n), where n is the sample size. This approximate method may be used when the sample size is large (at least 25), thanks to Central Limit Theorem.
+An approximate p-value can also be calculated assuming that under Η₀, the sample proportion will follow a normal distribution with mean equal to 1/3 and variance equal to 2/(9*n), where n is the sample size. This approximate method may be used when the sample size is large (at least 25), thanks to Central Limit Theorem.
 '''
 
 
