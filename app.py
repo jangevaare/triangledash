@@ -40,7 +40,7 @@ app.layout = html.Div(className = 'twelve columns', children=[
 html.Script(type="text/javascript", src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"),
     html.Div(className='row', children=[
         html.Center(
-            html.H1('TriangeDash: Triangle Test Calculator and Utilities')
+            html.H1('TriangleDash: Triangle Test Calculator and Utilities')
             )
         ]),
     html.Div(className='row', children=[
